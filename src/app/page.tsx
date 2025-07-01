@@ -5,11 +5,11 @@ import Footer from "@/components/footer";
 
 export default function Home() {
   return (
-    <>
-      <main className="relative min-h-screen bg-white overflow-hidden">
+    <div className="flex flex-col h-screen overflow-hidden">
+      <main className="relative flex-1 bg-white overflow-hidden">
         {/* Background game slider only on mobile */}
-        <div className="absolute inset-0 z-0 block md:hidden justify-center items-start">
-          <div className="relative w-full h-[320px] overflow-hidden rounded-lg">
+        <div className="absolute inset-0 z-0 block md:hidden justify-center items-start ">
+          <div className="relative w-full h-[260px] overflow-hidden rounded-lg">
             <div
               className="absolute"
               style={{
@@ -41,25 +41,25 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/30 to-white z-10" />
           </div>
-
-          <style jsx global>{`
-            @keyframes vertical-loop {
-              0% {
-                transform: translateY(0%);
-              }
-              100% {
-                transform: translateY(-50%);
-              }
-            }
-          `}</style>
         </div>
 
-        <div className="relative z-20 flex flex-col md:flex-row min-h-screen">
+        <style jsx global>{`
+          @keyframes vertical-loop {
+            0% {
+              transform: translateY(0%);
+            }
+            100% {
+              transform: translateY(-50%);
+            }
+          }
+        `}</style>
+
+        <div className="relative z-20 flex flex-col md:flex-row h-full">
           {/* Mobile-specific layout */}
-          <section className="block md:hidden w-full px-6 pt-[254px] pb-12">
-            <div className="flex flex-col items-center mb-6">
+          <section className="block md:hidden w-full px-6 pt-[200] flex-1 overflow-hidden">
+            <div className="flex flex-col items-center mb-4">
               <Image
                 src="/assets/images/therealreward_logo.png"
                 alt="The Real Reward Logo"
@@ -68,11 +68,13 @@ export default function Home() {
                 priority
               />
             </div>
-            <RegisterForm />
+            <div className="flex-1 overflow-auto">
+              <RegisterForm />
+            </div>
           </section>
 
-          {/* Desktop layout (unchanged) */}
-          <section className="hidden md:flex w-[850px] flex-col justify-between pt-[70px] pb-[111px] px-[60px]">
+          {/* Desktop layout */}
+          <section className="hidden md:flex w-[850px] flex-col justify-between pt-[70px] pb-[200px] px-[60px] flex-shrink-0">
             <div className="flex flex-col items-center mb-8">
               <Image
                 src="/assets/images/therealreward_logo.png"
@@ -86,7 +88,7 @@ export default function Home() {
             <RegisterForm />
           </section>
 
-          {/* Original desktop-only image slider (no change) */}
+          {/* Desktop-only image slider */}
           <section className="relative hidden md:block w-full overflow-hidden">
             <div
               className="absolute origin-top-left"
@@ -120,12 +122,12 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/20 to-white z-10" />
           </section>
         </div>
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
