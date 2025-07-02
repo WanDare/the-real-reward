@@ -12,7 +12,15 @@ export const registerUser = async (payload: RegisterPayload) => {
   return response.data;
 };
 
-export const sendOtpCode = async (phone: string) => {
+export const resendOtpCode = async (phone: string) => {
   const response = await api.post("/customer/send-code", { phone });
+  return response.data;
+};
+
+export const verifyOtpCode = async (payload: {
+  phone: string;
+  code: string;
+}) => {
+  const response = await api.post("/customer/verify", payload);
   return response.data;
 };

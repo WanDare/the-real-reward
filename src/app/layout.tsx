@@ -22,6 +22,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "The Real Reward",
   description: "Website for Register and Login to get QR Code",
+  icons: {
+    icon: "/thereal_w_logo.svg",
+  },
 };
 
 export default function RootLayout({

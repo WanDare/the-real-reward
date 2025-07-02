@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import RegisterForm from "@/components/forms/RegisterForm";
 import Footer from "@/components/footer";
+import UserInfoForm from "@/components/forms/userinfo";
 
-export default function Auth() {
+export default function CompleteProfile() {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <main className="relative flex-1 bg-white overflow-hidden">
@@ -69,7 +69,7 @@ export default function Auth() {
               />
             </div>
             <div className="flex-1 overflow-auto">
-              <RegisterForm />
+              <UserInfoForm />
             </div>
           </section>
 
@@ -85,7 +85,7 @@ export default function Auth() {
                 className="mb-3"
               />
             </div>
-            <RegisterForm />
+            <UserInfoForm />
           </section>
 
           {/* Desktop-only image slider */}
