@@ -1,7 +1,8 @@
+"use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import PhoneInput from "../inputs/phoneinput";
-import QRCodeModal from "../ui/QRCodeModal";
 
 const genders = [
   { label: "Male", icon: "/assets/icons/male.svg" },
@@ -9,10 +10,11 @@ const genders = [
 ];
 
 export default function RegisterForm() {
+  const router = useRouter();
   const [selectedGender, setGender] = useState<string | null>(null);
   const [nameValue, setNameValue] = useState("");
   const [phoneData, setPhoneData] = useState({ phone: "", code: "+855" });
-  const [showModal, setShowModal] = useState(false);
+  const [isLeaving, setIsLeaving] = useState(false); 
 
   const isFormValid =
     nameValue.trim() !== "" &&
@@ -22,19 +24,29 @@ export default function RegisterForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isFormValid) {
-      setShowModal(true);
+      setIsLeaving(true); 
+      setTimeout(() => {
+        const params = new URLSearchParams({
+          name: nameValue,
+          phone: phoneData.phone,
+          code: phoneData.code,
+          gender: selectedGender ?? "",
+        }).toString();
+        router.push(`/otp?${params}`);
+      }, 300); 
     }
   };
 
   return (
-    <>
-      {showModal && <QRCodeModal onClose={() => setShowModal(false)} />}
-
+    <div
+      className={`transition-opacity duration-300 ${
+        isLeaving ? "opacity-0" : "opacity-100"
+      }`}
+    >
       <form
         className="flex flex-col gap-5 w-full max-w-md mx-auto"
         onSubmit={handleSubmit}
       >
-        {/* Header */}
         <div className="text-center">
           <h2 className="text-lg font-bold text-gray-800">
             Register Account Here!
@@ -44,7 +56,6 @@ export default function RegisterForm() {
           </p>
         </div>
 
-        {/* Full Name */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">
             Full Name <span className="text-red-500">*</span>
@@ -53,7 +64,7 @@ export default function RegisterForm() {
             type="text"
             placeholder="Full Name"
             required
-            className={`w-full px-4 py-3 rounded-lg text-base font-normal bg-[#F6F6F7] focus:border-[#FFA429] focus:ring-1 focus:ring-[#FFA429] outline-none ${
+            className={`w-full px-4 py-3 rounded-lg bg-[#F6F6F7] focus:border-[#FFA429] focus:ring-1 focus:ring-[#FFA429] outline-none ${
               nameValue ? "text-neutral-700" : "text-neutral-400"
             }`}
             value={nameValue}
@@ -61,7 +72,6 @@ export default function RegisterForm() {
           />
         </div>
 
-        {/* Phone */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">
             Phone <span className="text-red-500">*</span>
@@ -69,7 +79,6 @@ export default function RegisterForm() {
           <PhoneInput onChange={setPhoneData} />
         </div>
 
-        {/* Gender */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">
             Select Gender
@@ -83,7 +92,7 @@ export default function RegisterForm() {
                   selectedGender === g.label
                     ? "border-[#FFA429] bg-orange-50 text-[#FFA429]"
                     : "border-transparent bg-[#F6F6F7] text-neutral-500"
-                } self-stretch justify-start text-sm font-semibold leading-tight transition-all`}
+                } justify-start text-sm font-semibold transition`}
                 onClick={() => setGender(g.label)}
               >
                 <Image src={g.icon} alt={g.label} width={28} height={28} />
@@ -93,7 +102,6 @@ export default function RegisterForm() {
           </div>
         </div>
 
-        {/* Register Button */}
         <button
           type="submit"
           disabled={!isFormValid}
@@ -103,9 +111,9 @@ export default function RegisterForm() {
               : "bg-gray-200 text-gray-500 cursor-not-allowed"
           }`}
         >
-          Register
+          Next
         </button>
       </form>
-    </>
+    </div>
   );
 }
