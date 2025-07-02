@@ -2,7 +2,6 @@
 import Image from "next/image";
 import RegisterForm from "@/components/forms/RegisterForm";
 import Footer from "@/components/footer";
-import OtpForm from "@/components/forms/OtpForm";
 
 export default function Auth() {
   return (
@@ -70,7 +69,6 @@ export default function Auth() {
               />
             </div>
             <div className="flex-1 overflow-auto">
-              {/* <OtpForm /> */}
               <RegisterForm />
             </div>
           </section>
@@ -87,7 +85,6 @@ export default function Auth() {
                 className="mb-3"
               />
             </div>
-            {/* <OtpForm /> */}
             <RegisterForm />
           </section>
 

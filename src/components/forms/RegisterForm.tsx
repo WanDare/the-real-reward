@@ -1,8 +1,10 @@
 "use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import PhoneInput from "../inputs/phoneinput";
+import { registerUser } from "@/lib/api/authService";
 
 const genders = [
   { label: "Male", icon: "/assets/icons/male.svg" },
@@ -14,26 +16,39 @@ export default function RegisterForm() {
   const [selectedGender, setGender] = useState<string | null>(null);
   const [nameValue, setNameValue] = useState("");
   const [phoneData, setPhoneData] = useState({ phone: "", code: "+855" });
-  const [isLeaving, setIsLeaving] = useState(false); 
+  const [isLeaving, setIsLeaving] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   const isFormValid =
     nameValue.trim() !== "" &&
     selectedGender !== null &&
     phoneData.phone.trim() !== "";
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isFormValid) {
-      setIsLeaving(true); 
+    if (!isFormValid) return;
+
+    const payload = {
+      name: nameValue,
+      phone: phoneData.code.replace("+", "") + phoneData.phone,
+      code: "390920",
+      gender: selectedGender?.toUpperCase() as "MALE" | "FEMALE",
+    };
+
+    setLoading(true);
+    setMessage("");
+    try {
+      await registerUser(payload);
+      setMessage("✅ Registered successfully!");
+      setIsLeaving(true);
       setTimeout(() => {
-        const params = new URLSearchParams({
-          name: nameValue,
-          phone: phoneData.phone,
-          code: phoneData.code,
-          gender: selectedGender ?? "",
-        }).toString();
-        router.push(`/otp?${params}`);
-      }, 300); 
+        router.push(`/otp?phone=${payload.phone}&name=${nameValue}`);
+      }, 500);
+    } catch (err: any) {
+      setMessage(err?.response?.data?.message || err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -104,15 +119,21 @@ export default function RegisterForm() {
 
         <button
           type="submit"
-          disabled={!isFormValid}
+          disabled={!isFormValid || loading}
           className={`mt-2 w-full py-3 rounded-lg font-semibold transition ${
             isFormValid
               ? "bg-[#FFA429] text-white"
               : "bg-gray-200 text-gray-500 cursor-not-allowed"
           }`}
         >
-          Next
+          {loading ? "Registering..." : "Next"}
         </button>
+
+        {message && (
+          <p className="text-center text-sm text-red-500 font-medium">
+            {message}
+          </p>
+        )}
       </form>
     </div>
   );
