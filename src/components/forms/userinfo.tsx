@@ -10,6 +10,14 @@ const genders = [
   { label: "Female", icon: "/assets/icons/female.svg" },
 ];
 
+type AxiosErrorType = {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+};
+
 export default function UserInfoForm() {
   const searchParams = useSearchParams();
   const phone = searchParams.get("phone") || "";
@@ -50,9 +58,10 @@ export default function UserInfoForm() {
         typeof err === "object" &&
         err !== null &&
         "response" in err &&
-        typeof (err as any).response?.data?.message === "string"
+        typeof (err as AxiosErrorType).response?.data?.message === "string"
       ) {
-        setMessage((err as any).response.data.message);
+        const typedErr = err as AxiosErrorType;
+        setMessage(typedErr.response?.data?.message || "Registration failed.");
       } else if (err instanceof Error) {
         setMessage(err.message);
       } else {

@@ -41,7 +41,8 @@ export default function PhoneInput({
 
   return (
     <div className="relative w-full" ref={dropdownRef}>
-      <div className="flex">
+      <div className="flex relative w-full">
+        {/* Country selector button */}
         <button
           type="button"
           onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -54,18 +55,30 @@ export default function PhoneInput({
           <ChevronDownIcon className="w-3 h-3 ml-1 text-gray-500" />
         </button>
 
-        <input
-          type="tel"
-          placeholder="000 000 000"
-          required
-          className={`flex-1 px-4 py-3 rounded-r-lg leading-normal text-base font-normal bg-[#F6F6F7] focus:border-[#FFA429] focus:ring-1 focus:ring-[#FFA429] outline-none ${
-            phone ? "text-neutral-700" : "text-neutral-400"
-          }`}
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
+        {/* Phone input with icon */}
+        <div className="relative flex-1">
+          <input
+            type="tel"
+            placeholder="000 000 000"
+            required
+            className={`w-full pr-10 px-4 py-3 rounded-r-lg leading-normal text-base font-normal bg-[#F6F6F7] focus:border-[#FFA429] focus:ring-1 focus:ring-[#FFA429] outline-none ${
+              phone ? "text-neutral-700" : "text-neutral-400"
+            }`}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+            <Image
+              src="/assets/icons/phone.svg"
+              alt="Phone Icon"
+              width={18}
+              height={18}
+            />
+          </div>
+        </div>
       </div>
 
+      {/* Country dropdown */}
       {dropdownOpen && (
         <div className="absolute top-full left-0 mt-1 z-10 w-60 bg-white divide-y divide-gray-100 rounded-lg shadow-sm">
           <ul className="py-2 text-sm text-gray-700">
