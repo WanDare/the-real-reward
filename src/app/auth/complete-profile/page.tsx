@@ -26,16 +26,20 @@ export default function CompleteProfile() {
                 }}
               >
                 <div className="w-full h-full">
-                  <img
+                  <Image
                     src="/assets/images/game_slide_vertical.png"
                     alt="Slide 1"
+                    width={100}
+                    height={100}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="w-full h-full">
-                  <img
+                  <Image
                     src="/assets/images/game_slide_vertical.png"
                     alt="Slide 2"
+                    width={100}
+                    height={100}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -107,16 +111,20 @@ export default function CompleteProfile() {
                 }}
               >
                 <div className="w-full h-full">
-                  <img
+                  <Image
                     src="/assets/images/game_slide_vertical.png"
                     alt="Slide 1"
+                    width={100}
+                    height={100}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="w-full h-full">
-                  <img
+                  <Image
                     src="/assets/images/game_slide_vertical.png"
                     alt="Slide 2"
+                    width={100}
+                    height={100}
                     className="w-full h-full object-cover"
                   />
                 </div>
