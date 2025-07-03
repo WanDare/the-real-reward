@@ -1,14 +1,16 @@
 "use client";
+
 import Image from "next/image";
 import RegisterForm from "@/components/forms/RegisterForm";
 import Footer from "@/components/footer";
+import { Suspense } from "react";
 
 export default function Auth() {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <main className="relative flex-1 bg-white overflow-hidden">
         {/* Background game slider only on mobile */}
-        <div className="absolute inset-0 z-0 block md:hidden justify-center items-start ">
+        <div className="absolute inset-0 z-0 block md:hidden justify-center items-start">
           <div className="relative w-full h-[260px] overflow-hidden">
             <div
               className="absolute"
@@ -21,9 +23,7 @@ export default function Auth() {
             >
               <div
                 className="w-full h-full flex flex-col"
-                style={{
-                  animation: "vertical-loop 20s linear infinite",
-                }}
+                style={{ animation: "vertical-loop 20s linear infinite" }}
               >
                 <div className="w-full h-full">
                   <Image
@@ -61,7 +61,7 @@ export default function Auth() {
         `}</style>
 
         <div className="relative z-20 flex flex-col md:flex-row h-full">
-          {/* Mobile-specific layout */}
+          {/* Mobile layout */}
           <section className="block md:hidden w-full px-6 pt-[200] flex-1 overflow-hidden">
             <div className="flex flex-col items-center mb-4">
               <Image
@@ -73,7 +73,9 @@ export default function Auth() {
               />
             </div>
             <div className="flex-1 overflow-auto">
-              <RegisterForm />
+              <Suspense fallback={<p className="text-center">Loading...</p>}>
+                <RegisterForm />
+              </Suspense>
             </div>
           </section>
 
@@ -89,10 +91,12 @@ export default function Auth() {
                 className="mb-3"
               />
             </div>
-            <RegisterForm />
+            <Suspense fallback={<p className="text-center">Loading...</p>}>
+              <RegisterForm />
+            </Suspense>
           </section>
 
-          {/* Desktop-only image slider */}
+          {/* Desktop background */}
           <section className="relative hidden md:block w-full overflow-hidden">
             <div
               className="absolute origin-top-left"
@@ -106,9 +110,7 @@ export default function Auth() {
             >
               <div
                 className="w-full h-full flex flex-col gap-4"
-                style={{
-                  animation: "vertical-loop 30s linear infinite",
-                }}
+                style={{ animation: "vertical-loop 30s linear infinite" }}
               >
                 <div className="w-full h-full">
                   <Image

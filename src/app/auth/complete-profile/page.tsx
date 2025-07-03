@@ -1,15 +1,17 @@
 "use client";
+
 import Image from "next/image";
 import Footer from "@/components/footer";
 import UserInfoForm from "@/components/forms/userinfo";
+import { Suspense } from "react";
 
-export default function CompleteProfile() {
+export default function CompleteProfilePage() {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <main className="relative flex-1 bg-white overflow-hidden">
-        {/* Background game slider only on mobile */}
-        <div className="absolute inset-0 z-0 block md:hidden justify-center items-start ">
-          <div className="relative w-full h-[260px] overflow-hidden">
+        {/* Mobile-only background */}
+        <div className="absolute inset-0 z-0 block md:hidden justify-center items-start">
+          <div className="relative w-full h-[260px] overflow-hidden rounded-lg">
             <div
               className="absolute"
               style={{
@@ -21,9 +23,7 @@ export default function CompleteProfile() {
             >
               <div
                 className="w-full h-full flex flex-col"
-                style={{
-                  animation: "vertical-loop 20s linear infinite",
-                }}
+                style={{ animation: "vertical-loop 20s linear infinite" }}
               >
                 <div className="w-full h-full">
                   <Image
@@ -73,7 +73,9 @@ export default function CompleteProfile() {
               />
             </div>
             <div className="flex-1 overflow-auto">
-              <UserInfoForm />
+              <Suspense fallback={<p className="text-center">Loading...</p>}>
+                <UserInfoForm />
+              </Suspense>
             </div>
           </section>
 
@@ -89,10 +91,12 @@ export default function CompleteProfile() {
                 className="mb-3"
               />
             </div>
-            <UserInfoForm />
+            <Suspense fallback={<p className="text-center">Loading...</p>}>
+              <UserInfoForm />
+            </Suspense>
           </section>
 
-          {/* Desktop-only image slider */}
+          {/* Desktop-only background */}
           <section className="relative hidden md:block w-full overflow-hidden">
             <div
               className="absolute origin-top-left"
@@ -106,9 +110,7 @@ export default function CompleteProfile() {
             >
               <div
                 className="w-full h-full flex flex-col gap-4"
-                style={{
-                  animation: "vertical-loop 30s linear infinite",
-                }}
+                style={{ animation: "vertical-loop 30s linear infinite" }}
               >
                 <div className="w-full h-full">
                   <Image

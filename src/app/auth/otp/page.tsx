@@ -2,13 +2,14 @@
 import Footer from "@/components/footer";
 import OtpForm from "@/components/forms/OtpForm";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export default function OtpPage() {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <main className="relative flex-1 bg-white overflow-hidden">
         {/* Background game slider only on mobile */}
-        <div className="absolute inset-0 z-0 block md:hidden justify-center items-start ">
+        <div className="absolute inset-0 z-0 block md:hidden justify-center items-start">
           <div className="relative w-full h-[260px] overflow-hidden rounded-lg">
             <div
               className="absolute"
@@ -21,9 +22,7 @@ export default function OtpPage() {
             >
               <div
                 className="w-full h-full flex flex-col"
-                style={{
-                  animation: "vertical-loop 20s linear infinite",
-                }}
+                style={{ animation: "vertical-loop 20s linear infinite" }}
               >
                 <div className="w-full h-full">
                   <Image
@@ -73,7 +72,9 @@ export default function OtpPage() {
               />
             </div>
             <div className="flex-1 overflow-auto">
-              <OtpForm />
+              <Suspense fallback={<p className="text-center">Loading...</p>}>
+                <OtpForm />
+              </Suspense>
             </div>
           </section>
 
@@ -89,7 +90,9 @@ export default function OtpPage() {
                 className="mb-3"
               />
             </div>
-            <OtpForm />
+            <Suspense fallback={<p className="text-center">Loading...</p>}>
+              <OtpForm />
+            </Suspense>
           </section>
 
           {/* Desktop-only image slider */}
