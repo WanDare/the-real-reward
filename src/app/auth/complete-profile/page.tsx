@@ -4,6 +4,7 @@ import Image from "next/image";
 import Footer from "@/components/footer";
 import UserInfoForm from "@/components/forms/userinfo";
 import { Suspense } from "react";
+import { withBasePath } from "@/lib/utils/asset";
 
 export default function CompleteProfilePage() {
   return (
@@ -27,7 +28,7 @@ export default function CompleteProfilePage() {
               >
                 <div className="w-full h-full">
                   <Image
-                    src="/assets/images/game_slide_vertical.png"
+                    src={withBasePath("/assets/images/game_slide_vertical.png")}
                     alt="Slide 1"
                     width={100}
                     height={100}
@@ -36,7 +37,7 @@ export default function CompleteProfilePage() {
                 </div>
                 <div className="w-full h-full">
                   <Image
-                    src="/assets/images/game_slide_vertical.png"
+                    src={withBasePath("/assets/images/game_slide_vertical.png")}
                     alt="Slide 2"
                     width={100}
                     height={100}
@@ -65,7 +66,7 @@ export default function CompleteProfilePage() {
           <section className="block md:hidden w-full px-6 pt-[200] flex-1 overflow-hidden">
             <div className="flex flex-col items-center mb-4">
               <Image
-                src="/assets/images/therealreward_logo.png"
+                src={withBasePath("/assets/images/therealreward_logo.png")}
                 alt="The Real Reward Logo"
                 width={231}
                 height={91}
@@ -83,7 +84,7 @@ export default function CompleteProfilePage() {
           <section className="hidden md:flex w-[850px] flex-col justify-between pt-[70px] pb-[200px] px-[60px] flex-shrink-0">
             <div className="flex flex-col items-center mb-8">
               <Image
-                src="/assets/images/therealreward_logo.png"
+                src={withBasePath("/assets/images/therealreward_logo.png")}
                 alt="The Real Reward Logo"
                 width={231}
                 height={120}
@@ -114,7 +115,7 @@ export default function CompleteProfilePage() {
               >
                 <div className="w-full h-full">
                   <Image
-                    src="/assets/images/game_slide_vertical.png"
+                    src={withBasePath("/assets/images/game_slide_vertical.png")}
                     alt="Slide 1"
                     width={100}
                     height={100}
@@ -123,7 +124,7 @@ export default function CompleteProfilePage() {
                 </div>
                 <div className="w-full h-full">
                   <Image
-                    src="/assets/images/game_slide_vertical.png"
+                    src={withBasePath("/assets/images/game_slide_vertical.png")}
                     alt="Slide 2"
                     width={100}
                     height={100}

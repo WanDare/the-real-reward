@@ -1,15 +1,15 @@
 "use client";
-
 import Image from "next/image";
 import RegisterForm from "@/components/forms/RegisterForm";
 import Footer from "@/components/footer";
 import { Suspense } from "react";
+import { withBasePath } from "@/lib/utils/asset";
 
 export default function Auth() {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <main className="relative flex-1 bg-white overflow-hidden">
-        {/* Background game slider only on mobile */}
+        {/* Mobile Background */}
         <div className="absolute inset-0 z-0 block md:hidden justify-center items-start">
           <div className="relative w-full h-[260px] overflow-hidden">
             <div
@@ -27,7 +27,7 @@ export default function Auth() {
               >
                 <div className="w-full h-full">
                   <Image
-                    src="/assets/images/game_slide_vertical.png"
+                    src={withBasePath("/assets/images/game_slide_vertical.png")}
                     alt="Slide 1"
                     width={100}
                     height={100}
@@ -36,7 +36,7 @@ export default function Auth() {
                 </div>
                 <div className="w-full h-full">
                   <Image
-                    src="/assets/images/game_slide_vertical.png"
+                    src={withBasePath("/assets/images/game_slide_vertical.png")}
                     alt="Slide 2"
                     width={100}
                     height={100}
@@ -65,7 +65,7 @@ export default function Auth() {
           <section className="block md:hidden w-full px-6 pt-[200] flex-1 overflow-hidden">
             <div className="flex flex-col items-center mb-4">
               <Image
-                src="/assets/images/therealreward_logo.png"
+                src={withBasePath("/assets/images/therealreward_logo.png")}
                 alt="The Real Reward Logo"
                 width={231}
                 height={91}
@@ -83,7 +83,7 @@ export default function Auth() {
           <section className="hidden md:flex w-[850px] flex-col justify-between pt-[70px] pb-[200px] px-[60px] flex-shrink-0">
             <div className="flex flex-col items-center mb-8">
               <Image
-                src="/assets/images/therealreward_logo.png"
+                src={withBasePath("/assets/images/therealreward_logo.png")}
                 alt="The Real Reward Logo"
                 width={231}
                 height={120}
@@ -96,7 +96,7 @@ export default function Auth() {
             </Suspense>
           </section>
 
-          {/* Desktop background */}
+          {/* Desktop Background */}
           <section className="relative hidden md:block w-full overflow-hidden">
             <div
               className="absolute origin-top-left"
@@ -114,7 +114,7 @@ export default function Auth() {
               >
                 <div className="w-full h-full">
                   <Image
-                    src="/assets/images/game_slide_vertical.png"
+                    src={withBasePath("/assets/images/game_slide_vertical.png")}
                     alt="Slide 1"
                     width={100}
                     height={100}
@@ -123,7 +123,7 @@ export default function Auth() {
                 </div>
                 <div className="w-full h-full">
                   <Image
-                    src="/assets/images/game_slide_vertical.png"
+                    src={withBasePath("/assets/images/game_slide_vertical.png")}
                     alt="Slide 2"
                     width={100}
                     height={100}
