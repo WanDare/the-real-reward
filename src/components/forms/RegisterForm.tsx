@@ -51,7 +51,7 @@ export default function RegisterForm() {
       </div>
 
       <div>
-        <label className="block text-neutral-500 text-xs font-semibold mb-2">
+        <label className="block text-neutral-500 text-xs font-semibold mb-[5px]">
           Phone Number <span className="text-red-500">*</span>
         </label>
         <PhoneInput onChange={setPhoneData} />

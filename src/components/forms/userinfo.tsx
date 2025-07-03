@@ -13,20 +13,20 @@ const genders = [
 export default function UserInfoForm() {
   const searchParams = useSearchParams();
   const phone = searchParams.get("phone") || "";
+  const code = searchParams.get("code") || "";
 
   const [name, setName] = useState("");
   const [gender, setGender] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [showQR, setShowQR] = useState(false);
+  const [qrData, setQrData] = useState("");
 
   const isValid = name.trim() !== "" && gender && phone;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValid) return;
-
-    const code = searchParams.get("code") || "";
 
     const payload = {
       name,
@@ -38,6 +38,12 @@ export default function UserInfoForm() {
     setLoading(true);
     try {
       await registerUser(payload);
+      const userQr = JSON.stringify({
+        name: payload.name,
+        phone: payload.phone,
+        gender: payload.gender,
+      });
+      setQrData(userQr);
       setShowQR(true);
     } catch (err: any) {
       setMessage(err?.response?.data?.message || "Registration failed.");
@@ -63,7 +69,7 @@ export default function UserInfoForm() {
           </div>
 
           <div>
-            <label className=" text-neutral-500 text-xs font-semibold leading-none mb-[5px] font-['Poppins']">
+            <label className="text-neutral-500 text-xs font-semibold leading-none font-['Poppins']">
               Full Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -72,23 +78,23 @@ export default function UserInfoForm() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full px-[11px] py-[12px] rounded-lg bg-[#F6F6F7] text-neutral-700 text-base font-normal font-['Poppins'] leading-normal focus:ring-1 focus:ring-orange-400 outline-none"
+              className="w-full mt-[5px] px-[11px] py-[12px] rounded-lg bg-[#F6F6F7] text-neutral-700 text-base font-normal font-['Poppins'] leading-normal focus:ring-1 focus:ring-orange-400 outline-none"
             />
           </div>
 
           <div>
-            <label className=" text-neutral-500 text-xs font-semibold leading-none mb-[5px] font-['Poppins']">
+            <label className="text-neutral-500 text-xs font-semibold leading-none mb-[5px] font-['Poppins']">
               Select Gender <span className="text-red-500">*</span>
             </label>
-            <div className="flex gap-4">
+            <div className="flex gap-4 mt-[5px]">
               {genders.map((g) => (
                 <button
                   key={g.label}
                   type="button"
                   className={`flex-1 flex items-center gap-[10px] px-[10px] py-[8px] rounded-lg border transition text-sm font-semibold justify-start ${
                     gender === g.label
-                      ? "border-orange-400 bg-orange-50 text-amber-500 text-sm font-semibold leading-tight font-['Poppins']"
-                      : "bg-[#F6F6F7] border-none text-neutral-500 text-sm font-semibold leading-tight font-['Poppins']"
+                      ? "border-orange-400 bg-orange-50 text-amber-500"
+                      : "bg-[#F6F6F7] border-transparent text-neutral-500"
                   }`}
                   onClick={() => setGender(g.label)}
                 >
@@ -115,7 +121,9 @@ export default function UserInfoForm() {
         </form>
       </div>
 
-      {showQR && <QRCodeModal onClose={() => setShowQR(false)} />}
+      {showQR && (
+        <QRCodeModal qrData={qrData} onClose={() => setShowQR(false)} />
+      )}
     </>
   );
 }
