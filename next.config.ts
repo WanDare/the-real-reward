@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
   assetPrefix: isProd ? `/${repo}/` : "",
   trailingSlash: true,
   images: {
-    unoptimized: true, 
+    unoptimized: true,
   },
 };
 
