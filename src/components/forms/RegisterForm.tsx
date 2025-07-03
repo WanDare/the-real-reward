@@ -29,8 +29,9 @@ export default function RegisterForm() {
       if (!res.ok) throw new Error("Failed to send OTP");
 
       router.push(`/auth/otp?phone=${phone}`);
-    } catch (err: any) {
-      setMessage("❌ " + (err.message || "Unknown error"));
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
+      setMessage("❌ " + errorMessage);
     } finally {
       setLoading(false);
     }

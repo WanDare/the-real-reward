@@ -45,8 +45,19 @@ export default function UserInfoForm() {
       });
       setQrData(userQr);
       setShowQR(true);
-    } catch (err: any) {
-      setMessage(err?.response?.data?.message || "Registration failed.");
+    } catch (err: unknown) {
+      if (
+        typeof err === "object" &&
+        err !== null &&
+        "response" in err &&
+        typeof (err as any).response?.data?.message === "string"
+      ) {
+        setMessage((err as any).response.data.message);
+      } else if (err instanceof Error) {
+        setMessage(err.message);
+      } else {
+        setMessage("Registration failed.");
+      }
     } finally {
       setLoading(false);
     }

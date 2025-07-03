@@ -59,8 +59,8 @@ export default function OtpForm() {
       }
 
       router.push(`/auth/complete-profile?phone=${phone}&code=${code}`);
-    } catch (err: any) {
-      const raw = err.message || "";
+    } catch (err: unknown) {
+      const raw = err instanceof Error ? err.message : String(err);
       if (raw.includes("Code invalid")) {
         setError(
           "The code you entered is invalid or has expired. Please try again."

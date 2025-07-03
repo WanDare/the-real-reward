@@ -35,10 +35,9 @@ export default function PhoneInput({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 🔁 Notify parent on changes
   useEffect(() => {
     onChange({ phone, code: selected.code });
-  }, [phone, selected]);
+  }, [phone, selected, onChange]);
 
   return (
     <div className="relative w-full" ref={dropdownRef}>
