@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { withBasePath } from "@/lib/utils/asset";
 
 const countries = [
   { name: "Cambodia", code: "+855", flag: "/assets/icons/flag_kh.svg" },
@@ -69,7 +70,7 @@ export default function PhoneInput({
           />
           <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
             <Image
-              src="/assets/icons/phone.svg"
+              src={withBasePath("/assets/icons/phone.svg")}
               alt="Phone Icon"
               width={18}
               height={18}
@@ -93,7 +94,7 @@ export default function PhoneInput({
                   className="flex w-full items-center px-4 py-2 text-sm font-normal hover:bg-gray-100"
                 >
                   <Image
-                    src={country.flag}
+                    src={withBasePath(country.flag)}
                     width={20}
                     height={14}
                     alt={country.name}
