@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
+import { withBasePath } from "@/lib/utils/asset";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   title: "The Real Reward",
   description: "Website for Register and Login to get QR Code",
   icons: {
-    icon: "/thereal_w_logo.svg",
+    icon: withBasePath("/thereal_w_logo.svg"),
   },
 };
 

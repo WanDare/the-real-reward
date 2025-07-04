@@ -5,7 +5,7 @@ import Footer from "@/components/footer";
 import { Suspense } from "react";
 import { withBasePath } from "@/lib/utils/asset";
 
-export default function Auth() {
+export default function RegisterPage() {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <main className="relative flex-1 bg-white overflow-hidden">
