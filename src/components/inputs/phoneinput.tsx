@@ -50,7 +50,7 @@ export default function PhoneInput({
           className="flex items-center bg-[#F6F6F7] px-3 rounded-l-lg"
         >
           <Image src={selected.flag} width={20} height={14} alt="Flag" />
-          <span className="ml-2 text-sm font-medium text-gray-700">
+          <span className="ml-2 text-sm font-medium text-gray-700 ">
             {selected.code}
           </span>
           <ChevronDownIcon className="w-3 h-3 ml-1 text-gray-500" />
